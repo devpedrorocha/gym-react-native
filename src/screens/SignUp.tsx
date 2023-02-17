@@ -1,14 +1,18 @@
 import { useNavigation } from '@react-navigation/native'
-import { VStack, Image, Text, Center, Heading, ScrollView } from 'native-base'
+import { VStack, Image, Text, Center, Heading, ScrollView, useToast } from 'native-base'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+
+import { api } from '@services/api'
 
 import LogoSvg from '@assets/logo.svg'
 import BackgroundImg from '@assets/background.png'
 
 import { Input } from '@components/Input'
 import { Button } from '@components/Button'
+
+import { AppError } from '@utils/AppError'
 
 
 
@@ -35,12 +39,21 @@ export function SignUp() {
 
     const navigation = useNavigation()
 
+    const toast = useToast();
+
     function handleGoBack() {
         navigation.goBack();
     }
 
-    function handleSignUp(data: FormDataProps) {
-        console.log(data);
+    async function handleSignUp({ name, email, password }: FormDataProps) {
+        try {
+            const response = await api.post('/users', { name, email, password })
+
+        } catch (error) {
+            const isAppError = error instanceof AppError
+            toast.show()
+
+        }
     }
 
     return (
