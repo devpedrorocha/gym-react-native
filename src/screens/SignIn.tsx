@@ -38,7 +38,7 @@ export function SignIn() {
                 </Center>
 
                 <Center>
-                    <Heading color="gray.100" fontSize="xl" mb={6} fontFamily="heading">
+                    <Heading color="gray.100" fontSize="xl" mb={6} fontFamily="heading" >
                         Acesse sua conta
                     </Heading>
                     <Input
@@ -53,7 +53,7 @@ export function SignIn() {
                     <Button title="Acessar" />
                 </Center>
 
-                <Center mt={24}>
+                <Center mt={20}>
                     <Text color="gray.100" fontSize="sm" mb={3} fontFamily="body" >
                         Ainda não tem acesso?
                     </Text>
