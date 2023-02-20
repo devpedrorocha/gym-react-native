@@ -13,6 +13,8 @@ import { Input } from '@components/Input'
 import { Button } from '@components/Button'
 
 import { AppError } from '@utils/AppError'
+import { useState } from 'react'
+import { useAuth } from '@hooks/useAuth'
 
 
 
@@ -33,6 +35,8 @@ const signUpSchema = yup.object({
 
 export function SignUp() {
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const { control, handleSubmit, formState: { errors } } = useForm<FormDataProps>({
         resolver: yupResolver(signUpSchema)
     });
@@ -41,17 +45,32 @@ export function SignUp() {
 
     const toast = useToast();
 
+    const {signIn} = useAuth();
+
     function handleGoBack() {
         navigation.goBack();
     }
 
     async function handleSignUp({ name, email, password }: FormDataProps) {
         try {
+            setIsLoading(true);
             const response = await api.post('/users', { name, email, password })
+            await signIn(email, password)
 
         } catch (error) {
+
+            setIsLoading(false);
             const isAppError = error instanceof AppError
-            toast.show()
+            const title = isAppError
+              ? error.message
+              : "Não foi possível entrar. Tente novamente mais tarde.";
+
+
+            toast.show({
+              title,
+              placement: "top",
+              bgColor: "red.500",
+            });
 
         }
     }
@@ -140,6 +159,7 @@ export function SignUp() {
 
                     <Button
                         title="Criar e acessar"
+                        isLoading={isLoading}
                         onPress={handleSubmit(handleSignUp)}
                     />
                 </Center>
