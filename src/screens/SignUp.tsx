@@ -45,7 +45,7 @@ export function SignUp() {
 
     const toast = useToast();
 
-    const {signIn} = useAuth();
+    const { signIn } = useAuth();
 
     function handleGoBack() {
         navigation.goBack();
@@ -62,14 +62,14 @@ export function SignUp() {
             setIsLoading(false);
             const isAppError = error instanceof AppError
             const title = isAppError
-              ? error.message
-              : "Não foi possível entrar. Tente novamente mais tarde.";
+                ? error.message
+                : "Não foi possível entrar. Tente novamente mais tarde.";
 
 
             toast.show({
-              title,
-              placement: "top",
-              bgColor: "red.500",
+                title,
+                placement: "top",
+                bgColor: "red.500",
             });
 
         }

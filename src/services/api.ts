@@ -22,7 +22,6 @@ let isRefreshing = false;
 
 
 api.registerInterceptTokenManager = signOut => {
-
     const interceptTokenManager = api.interceptors.response.use((response) => response, async (requestError) => {
         if (requestError?.response?.status === 401) {
             if (requestError.response.data?.message === 'token.expired' || requestError.response.data?.message === 'token.invalid') {

@@ -29,7 +29,7 @@ type FormData = {
 export function SignIn() {
   const { signIn } = useAuth();
 
-  const[isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     control,
@@ -47,8 +47,9 @@ export function SignIn() {
 
   async function handleSignIn({ email, password }: FormData) {
     try {
-        setIsLoading(true);
-      await signIn(email, password);
+      setIsLoading(true);
+      let response = await signIn(email, password);
+      console.log(response)
     } catch (error) {
       const isAppError = error instanceof AppError;
       const title = isAppError
