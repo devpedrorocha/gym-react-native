@@ -13,7 +13,6 @@ import { History } from '@screens/History'
 import { Exercise } from '@screens/Exercise'
 
 
-
 type AppRoutes = {
     home: undefined;
     exercise: { exerciseId: string };

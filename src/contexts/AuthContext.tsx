@@ -95,6 +95,8 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
       const userLogged = await storageUserGet();
       const { token } = await storageAuthTokenGet();
 
+      console.log('passou aqui', userLogged)
+
       if (token && userLogged) {
         userAndTokenUpdate(userLogged, token)
       }

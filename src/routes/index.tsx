@@ -10,12 +10,13 @@ export function Routes() {
   const { colors } = useTheme();
   const { user, isLoadingUserStorageData } = useAuth();
 
+  console.log(user)
 
   const theme = DefaultTheme;
   theme.colors.background = colors.gray[700];
 
-  if(isLoadingUserStorageData) {
-    return <Loading/>
+  if (isLoadingUserStorageData) {
+    return <Loading />
   }
 
   return (
